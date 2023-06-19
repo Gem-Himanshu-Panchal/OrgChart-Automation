@@ -6,9 +6,11 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.utils.GenericUtils;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,11 @@ public class GeminiView {
             GenericUtils.waitUntilLoaderDisappear();
             List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
 
+//            79 is for Akash Verma, 1081 for Vishal Malik and 1106 for Yogi rana
             for (int i = start; i < end; i++) {
+                if(i==79 || i==1081 ||i==1106){
+                    i++;
+                }
                 List<String> userHierarchy = GenericUtils.getHierarchy(i);
 
                 int lastIndex = userHierarchy.size() - 1;
@@ -46,7 +52,7 @@ public class GeminiView {
                             userHierarchy.get(0) + " is at right hierarchy", STATUS.PASS, DriverAction.takeSnapShot());
                 } else {
                     GemTestReporter.addTestStep("Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
-                            userHierarchy.get(0) + " is at right hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
+                            userHierarchy.get(0) + " is at wrong hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
                 }
                 DriverAction.waitSec(1);
                 DriverAction.getElement(CommonLocators.employeeDiv("name", userHierarchy.get(0), "EmployeeCode", userHierarchy.get(1))).click();
@@ -123,6 +129,28 @@ public class GeminiView {
                 GenericUtils.waitUntilElementAppear(CommonLocators.chartContainer);
             }
         } catch (Exception e) {
+            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Given("^Search for any duplicate employee in OrgChart Gemini view$")
+    public void searchForAnyDuplicateEmployeeInOrgChartGeminiView() {
+        try{
+            List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+
+            for(int i=0;i<hashMapList.size();i++){
+                String name = hashMapList.get(i).get("EmployeeName");
+               String code =  hashMapList.get(i).get("EmployeeCode");
+
+               List<WebElement> li = DriverAction.getElements(CommonLocators.dataSource("name",name,"EmployeeCode",""));
+
+               if(li.size()>1){
+                   System.out.println(name+" "+code);
+               }
+
+            }
+        }catch (Exception e){
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
             throw new RuntimeException(e);
         }

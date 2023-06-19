@@ -43,4 +43,8 @@ public class CommonLocators {
     public static By employeeDiv(String key1, String empName,String key2, String code){
         return By.xpath("//tr[@class='nodes']//div[contains(@data-source, '"+key1+"\":\""+empName+"') and contains(@data-source,'"+key2+"\":\""+code+"')]//div");
     }
+
+    public static By ecTeamBox(String teamName){
+        return By.xpath("//div[@class='teambox']//div[contains(text(),'"+teamName+"')]");
+    }
 }
