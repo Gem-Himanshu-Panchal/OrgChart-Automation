@@ -4,17 +4,29 @@ import java.util.HashMap;
 import java.util.List;
 
 public class getEmployeeIndex {
-    public static void main(String[] args) {
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
-        String name = "Yashita Khurana";
-        String code = "GSI GI 655";
+    public static int getIndex(String ecMentor, String code) {
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
+//        String name = "Hrithik Arora";
+//        String code = "GSI G 1058";
         int index = 0;
         for(int i=0;i<hashMapList.size();i++){
-            if(hashMapList.get(i).get("EmployeeName").equalsIgnoreCase(name) && hashMapList.get(i).get("EmployeeCode").equalsIgnoreCase(code)){
+            if(hashMapList.get(i).get("EmployeeName").equalsIgnoreCase(ecMentor) && hashMapList.get(i).get("EmployeeCode").equalsIgnoreCase(code)){
                 index = i;break;
             }
         }
 
-        System.out.println(index);
+       return index;
+    }
+    public static int getIndex2(String ecMentor, String code) {
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+
+        int index = 0;
+        for(int i=0;i<hashMapList.size();i++){
+            if(hashMapList.get(i).get("EmployeeName").equalsIgnoreCase(ecMentor) && hashMapList.get(i).get("EmployeeCode").equalsIgnoreCase(code)){
+                index = i;break;
+            }
+        }
+
+        return index;
     }
 }

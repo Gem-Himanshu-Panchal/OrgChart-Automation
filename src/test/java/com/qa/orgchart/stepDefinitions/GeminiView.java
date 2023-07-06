@@ -10,7 +10,6 @@ import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class GeminiView {
     public void searchForToEmployeeInOrgChart(int start, int end) {
         try {
             GenericUtils.waitUntilLoaderDisappear();
-            List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+            List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
 
 //            79 is for Akash Verma, 1081 for Vishal Malik and 1106 for Yogi rana
             for (int i = start; i < end; i++) {
@@ -38,8 +37,8 @@ public class GeminiView {
                     DriverAction.hoverOver(CommonLocators.dataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
                     DriverAction.scrollIntoView(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
                     DriverAction.scrollToBottom();
-                    DriverAction.scrollIntoView(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
-                    DriverAction.scrollToBottom();
+//                    DriverAction.scrollIntoView(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
+//                    DriverAction.scrollToBottom();
                     DriverAction.getElement(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex))).click();
                     userHierarchy.remove(lastIndex);
                     userHierarchy.remove(lastIndex - 1);
@@ -54,8 +53,7 @@ public class GeminiView {
                     GemTestReporter.addTestStep("Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
                             userHierarchy.get(0) + " is at wrong hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
                 }
-                DriverAction.waitSec(1);
-                DriverAction.getElement(CommonLocators.employeeDiv("name", userHierarchy.get(0), "EmployeeCode", userHierarchy.get(1))).click();
+                DriverAction.getElement(CommonLocators.employeeDiv(userHierarchy.get(0),  userHierarchy.get(1))).click();
                 GenericUtils.waitUntilElementAppear(CommonLocators.infoCard);
                 DriverAction.waitSec(2);
                 assert hashMapList != null;

@@ -44,4 +44,19 @@ public class LoginSrepDefinition {
             throw new RuntimeException(e);
         }
     }
+
+    @Then("^Switch to \"(.*)\" view$")
+    public static void switchToView(String viewName) {
+        try {
+            GenericUtils.waitUntilLoaderDisappear();
+            GenericUtils.waitUntilElementAppear(CommonLocators.dropdownBox);
+            DriverAction.click(CommonLocators.dropdownBox);
+            GenericUtils.waitUntilLoaderDisappear();
+            GenericUtils.waitUntilElementAppear(CommonLocators.viewValue(viewName));
+            DriverAction.getElement(CommonLocators.viewValue(viewName)).click();
+        } catch (Exception e) {
+            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
+            throw new RuntimeException(e);
+        }
+    }
 }

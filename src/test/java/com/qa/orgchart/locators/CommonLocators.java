@@ -40,11 +40,32 @@ public class CommonLocators {
         return By.xpath("//span[contains(text(),'"+value+": ')]//..//span[2]");
     }
 
-    public static By employeeDiv(String key1, String empName,String key2, String code){
-        return By.xpath("//tr[@class='nodes']//div[contains(@data-source, '"+key1+"\":\""+empName+"') and contains(@data-source,'"+key2+"\":\""+code+"')]//div");
+    public static By employeeDiv(String empName,String code){
+//        return By.xpath("//tr[@class='nodes']//div[contains(@data-source, '"+key1+"\":\""+empName+"') and contains(@data-source,'"+key2+"\":\""+code+"')]//div");
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up'))  and contains(@data-source, 'name\":\""+empName+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]//div");
     }
 
     public static By ecTeamBox(String teamName){
         return By.xpath("//div[@class='teambox']//div[contains(text(),'"+teamName+"')]");
+
+    }
+    public static By ecTeamBoxDownKey(String teamName){
+        return By.xpath("//div[contains(@data-source,'name\":\""+teamName+"')]//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']");
+
+    }
+
+    public static By ecTeamDownKey(String name,String code) {
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up'))  and contains(@data-source, 'name\":\""+name+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']");
+    }
+    public static By ecEmployeeBox(String name,String code){
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up'))  and contains(@data-source, 'name\":\""+name+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]");
+    }
+
+    public static By hierarchyCheck(String mentorName, String mentorCode, String name, String code){
+        return By.xpath("//div[contains(@data-source, 'name\":\""+mentorName+"') and contains(@data-source, 'EmployeeCode\":\""+mentorCode+"')]//ancestor::tr[@class='nodes']//div[contains(@data-source, 'name\":\""+name+"') and contains(@data-source, 'EmployeeCode\":\""+code+"')]");
+    }
+
+    public static By noMentorHierarchy(String ecTech,String name, String code){
+        return By.xpath("//div[@class='teambox']//div[contains(text(),'"+ecTech+"')]//ancestor::table[1]//tr[@class='nodes']//div[contains(@data-source, 'name\":\""+name+"') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up')) and contains(@data-source, 'EmployeeCode\":\""+code+"')]");
     }
 }

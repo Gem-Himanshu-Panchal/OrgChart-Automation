@@ -1,4 +1,3 @@
-@test2
 Feature: EC view data validations
 
   Background: Verify if user successfully log into Orgchart
@@ -7,6 +6,4 @@ Feature: EC view data validations
     And Switch to "DC" view
 
   Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 150-250
-    Given Search for 0 to 1 employee in EC view of OrgChart
-
-
+    Given Search for 0 to 10 employee in DC view of OrgChart
