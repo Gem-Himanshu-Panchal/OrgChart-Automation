@@ -21,12 +21,12 @@ public class ECTechView {
     public void search_for_to_employee_in_ec_view_of_org_chart(Integer start, Integer end) {
         GenericUtils.waitUntilLoaderDisappear();
         GenericUtils.waitUntilElementAppear(CommonLocators.chartContainer);
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         String mentorName = null;
         String mentorCode = null;
         for (int i = start; i < end; i++) {
-//           5 is for aaradhya ahuja, 11 for aayush kalra, 32 for abhirakshit, 122 anil pahal, 123 for anil singh, 211 ashish verma
-            if (i == 122 || i == 123) {
+// 124 anil pahal, 125 Anil singh, 212,380,479,504 Branding, 385 (Harinath Mn)
+            if (i==124 || i==125 ||i==212 ||i==385 ||i == 479|| i==504) {
                 System.out.println("null");
             } else {
                 List<String> userHierarchy = GenericUtils.getECHierarchy(i);
@@ -58,10 +58,10 @@ public class ECTechView {
                 DriverAction.scrollIntoView(CommonLocators.hierarchyCheck(mentorName, mentorCode, userHierarchy.get(0), userHierarchy.get(1)));
                 if (mentorName != null && mentorCode != null) {
                     if (DriverAction.isExist(CommonLocators.hierarchyCheck(mentorName, mentorCode, userHierarchy.get(0), userHierarchy.get(1)))) {
-                        GemTestReporter.addTestStep("Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
+                        GemTestReporter.addTestStep(i+ ". Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
                                 userHierarchy.get(0) + " is at right hierarchy", STATUS.PASS, DriverAction.takeSnapShot());
                     } else {
-                        GemTestReporter.addTestStep("Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
+                        GemTestReporter.addTestStep(i+". Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
                                 userHierarchy.get(0) + " is at wrong hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
                     }
                 } else {

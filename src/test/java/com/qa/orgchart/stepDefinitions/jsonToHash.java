@@ -10,10 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class jsonToHash {
-    public static List<HashMap<String, String>> getHashList() {
+
+    public static List<HashMap<String, String>> getHashList2() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("src/test/java/com/qa/orgchart/jsonData/pimcoDC.json"));
+            JsonNode rootNode = objectMapper.readTree(new File("src/test/java/com/qa/orgchart/jsonData/updatedJsonPayload.json"));
 
 
             List<HashMap<String, String>> hashMapList = new ArrayList<>();
@@ -36,11 +37,10 @@ public class jsonToHash {
         }
     }
 
-
-    public static List<HashMap<String, String>> getHashList2() {
+    public static List<HashMap<String, String>> getHashList() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(new File("src/test/java/com/qa/orgchart/jsonData/updatedJsonPayload.json"));
+            JsonNode rootNode = objectMapper.readTree(new File("src/test/java/com/qa/orgchart/jsonData/jsonPayload.json"));
 
 
             List<HashMap<String, String>> hashMapList = new ArrayList<>();

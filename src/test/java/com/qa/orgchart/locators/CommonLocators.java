@@ -14,6 +14,7 @@ public class CommonLocators {
     public static By infoCard = By.xpath("//div[@class='nsm-body']");
     public static By employeeProfile = By.xpath("//div[@class='nsm-body']//img");
     public static By crossIcon = By.xpath("//span[@class='myclose']");
+    public static By downArrow = By.xpath("//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']");
 
     public static By viewValue(String viewValue) {
         return By.xpath("//span[contains(text(), '" + viewValue + "') and contains(@class, 'ng-option-label ng-star-inserted')]");
@@ -42,7 +43,14 @@ public class CommonLocators {
 
     public static By employeeDiv(String empName,String code){
 //        return By.xpath("//tr[@class='nodes']//div[contains(@data-source, '"+key1+"\":\""+empName+"') and contains(@data-source,'"+key2+"\":\""+code+"')]//div");
-        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up'))  and contains(@data-source, 'name\":\""+empName+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]//div");
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up'))  and contains(@data-source, 'name\":\""+empName+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]//div//img");
+    }
+
+    public static By employeeCard (String name, String code){
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@data-source, 'name\":\""+name+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]");
+    }
+    public static By employeeDivImg(String empName,String code){
+        return By.xpath("//tr[contains(@class,'nodes')]//div[contains(@class, 'node') and contains(@data-source, 'name\":\""+empName+"') and contains(@data-source,'EmployeeCode\":\""+code+"')]//div[1]//img");
     }
 
     public static By ecTeamBox(String teamName){
@@ -62,10 +70,14 @@ public class CommonLocators {
     }
 
     public static By hierarchyCheck(String mentorName, String mentorCode, String name, String code){
-        return By.xpath("//div[contains(@data-source, 'name\":\""+mentorName+"') and contains(@data-source, 'EmployeeCode\":\""+mentorCode+"')]//ancestor::tr[@class='nodes']//div[contains(@data-source, 'name\":\""+name+"') and contains(@data-source, 'EmployeeCode\":\""+code+"')]");
+        return By.xpath("//div[contains(@data-source, 'name\":\""+mentorName+"') and contains(@data-source, 'EmployeeCode\":\""+mentorCode+"')]//ancestor::table[1]//tr[@class='nodes']//div[contains(@data-source, 'name\":\""+name+"') and contains(@data-source, 'EmployeeCode\":\""+code+"')]");
     }
 
     public static By noMentorHierarchy(String ecTech,String name, String code){
         return By.xpath("//div[@class='teambox']//div[contains(text(),'"+ecTech+"')]//ancestor::table[1]//tr[@class='nodes']//div[contains(@data-source, 'name\":\""+name+"') and contains(@class, 'cursorPointer') and not(contains(@class,'slide-up')) and contains(@data-source, 'EmployeeCode\":\""+code+"')]");
+    }
+
+    public static By dcTechEmployee(String dcTech, String name, String code){
+        return By.xpath("//div[contains(text(),'"+dcTech+"')]//ancestor::table[1]//tr[@class='lines'][1]/following-sibling::tr[@class='nodes']//div[contains(@data-source,'"+name+"') and contains(@data-source,'"+code+"')]");
     }
 }

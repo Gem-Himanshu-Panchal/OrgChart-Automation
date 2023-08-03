@@ -6,8 +6,10 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
 import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.stepDefinitions.jsonToHash;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,30 +27,18 @@ public class GenericUtils {
     }
 
     public static void waitUntilLoaderDisappear() {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 60);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(CommonLocators.loader));
+        if (DriverAction.isExist(CommonLocators.loader)) {
+            WebDriverWait wait = new WebDriverWait(DriverManager.getWebDriver(), 60);
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(CommonLocators.loader));
+        }
     }
 
     public static void waitUntilElementAppear(By locator) {
-        WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(60));
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        if (DriverAction.isExist(locator)) {
+            WebDriverWait webDriverWait = new WebDriverWait(DriverManager.getWebDriver(), Duration.ofSeconds(60));
+            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        }
     }
-
-
-//    @Then("^Switch to \"(.*)\" view$")
-//    public static void switchToView(String viewName) {
-//        try {
-//            GenericUtils.waitUntilLoaderDisappear();
-//            GenericUtils.waitUntilElementAppear(CommonLocators.dropdownBox);
-//            DriverAction.click(CommonLocators.dropdownBox);
-//            GenericUtils.waitUntilLoaderDisappear();
-//            GenericUtils.waitUntilElementAppear(CommonLocators.viewValue(viewName));
-//            DriverAction.getElement(CommonLocators.viewValue(viewName)).click();
-//        } catch (Exception e) {
-//            GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     public static List<String> getHierarchy(int index) {
         List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
@@ -78,7 +68,7 @@ public class GenericUtils {
     }
 
     public static List<String> getECHierarchy(int index) {
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         assert hashMapList != null;
         HashMap<String, String> employee = hashMapList.get(index);
 
@@ -121,11 +111,7 @@ public class GenericUtils {
                 }
             }
         }
-        if (hierarchy.get(0).equalsIgnoreCase("Ashish Agrawal")) {
-            int lastIndex = hierarchy.size() - 1;
-            hierarchy.remove(lastIndex);
-            hierarchy.remove(hierarchy.size() - 1);
-        }
+
         if (ecTech.equalsIgnoreCase("Infrastructure/IT") && name.equalsIgnoreCase("Prashank Chaudhary")) {
             hierarchy.add("Prashank Chaudhary");
             hierarchy.add("GSI N 015");
@@ -142,7 +128,7 @@ public class GenericUtils {
     }
 
     public static List<String> getDCHierarchy(int index) {
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
 
         HashMap<String, String> employee = hashMapList.get(index);
         String name = "";
@@ -255,7 +241,7 @@ public class GenericUtils {
 //        System.out.println(hierarchy);
 
 
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         List<HashMap<String, String>> hashMapListFull = jsonToHash.getHashList2();
 
         HashMap<String, String> employee = hashMapList.get(index);
@@ -277,15 +263,15 @@ public class GenericUtils {
             while (!name.equalsIgnoreCase("Vishal Malik")) {
                 for (int i = 0; i < hashMapList.size(); i++) {
                     HashMap<String, String> hashMap = hashMapList.get(i);
-                    if(name.equalsIgnoreCase("Prashank Chaudhary") && dcTech.contains("Pimco Infrastructure")){
+                    if (name.equalsIgnoreCase("Prashank Chaudhary") && dcTech.contains("Pimco Infrastructure")) {
                         break Outerloop;
                     }
                     if (hashMap.get("EmployeeName").equalsIgnoreCase(name) && hashMap.get("EmployeeCode").equalsIgnoreCase(code) && hashMap.get("DCTech").equalsIgnoreCase(dcTech)) {
                         flag = getIndex(name, code);
                         HashMap<String, String> nextHash2 = hashMapListFull.get(flag);
 
-                        if(nextHash2.containsKey("DCTech") && !nextHash2.get("DCTech").equalsIgnoreCase(dcTech)){
-                            if(nextHash2.containsKey("SecondaryDCs") && !nextHash2.get("SecondaryDCs").contains(dcTech)){
+                        if (nextHash2.containsKey("DCTech") && !nextHash2.get("DCTech").equalsIgnoreCase(dcTech)) {
+                            if (nextHash2.containsKey("SecondaryDCs") && !nextHash2.get("SecondaryDCs").contains(dcTech)) {
                                 break Outerloop;
                             }
                             break Outerloop;
@@ -357,7 +343,7 @@ public class GenericUtils {
             }
 
         }
-        if(dcTech.equalsIgnoreCase("Pimco Infrastructure")){
+        if (dcTech.equalsIgnoreCase("Pimco Infrastructure")) {
             hierarchy.add("Prashank Chaudhary");
             hierarchy.add("GSI N 015");
         }
@@ -390,5 +376,31 @@ public class GenericUtils {
         System.out.println(hierarchy);
 
         return hierarchy;
+    }
+
+
+
+    public static String getDcTech(String name, String code){
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        assert hashMapList != null;
+        for (HashMap<String, String> hm : hashMapList) {
+            if (hm.containsKey("EmployeeName") && hm.get("EmployeeName").equalsIgnoreCase(name) &&
+                    hm.containsKey("EmployeeCode") && hm.get("EmployeeCode").equalsIgnoreCase(code)) {
+                return hm.get("DCTech");
+            }
+        }
+        return null;
+    }
+
+    public static String getSecondaryDcTech(String name, String code){
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+        assert hashMapList != null;
+        for (HashMap<String, String> hm : hashMapList) {
+            if (hm.containsKey("EmployeeName") && hm.get("EmployeeName").equalsIgnoreCase(name) &&
+                    hm.containsKey("EmployeeCode") && hm.get("EmployeeCode").equalsIgnoreCase(code) && hm.containsKey("SecondaryDCs")) {
+                return hm.get("SecondaryDCs");
+            }
+        }
+        return "Nil";
     }
 }

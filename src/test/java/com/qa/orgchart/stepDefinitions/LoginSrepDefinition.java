@@ -52,6 +52,7 @@ public class LoginSrepDefinition {
             GenericUtils.waitUntilElementAppear(CommonLocators.dropdownBox);
             DriverAction.click(CommonLocators.dropdownBox);
             GenericUtils.waitUntilLoaderDisappear();
+            DriverAction.scrollIntoView(CommonLocators.viewValue(viewName));
             GenericUtils.waitUntilElementAppear(CommonLocators.viewValue(viewName));
             DriverAction.getElement(CommonLocators.viewValue(viewName)).click();
         } catch (Exception e) {

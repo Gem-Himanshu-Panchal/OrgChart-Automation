@@ -6,9 +6,6 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.utils.GenericUtils;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,50 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DCTechView {
-    @Given("Open modals in {string}")
-    public static void clickOnDownArrows(String teamBox) {
-        GenericUtils.waitUntilLoaderDisappear();
-        DriverAction.scrollIntoView(By.xpath("//tr[@class='nodes']//table//tr//td//div[@class='node cursorPointer']//img"));
-        DriverAction.waitSec(1);
-        DriverAction.hoverOver(By.xpath("//tr[@class='nodes']//table//tr//td//div[@class='node cursorPointer']//img"));
-        DriverAction.waitSec(1);
-        DriverAction.getElement(By.xpath("//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']")).click();
-        DriverAction.waitSec(1);
-        DriverAction.scrollIntoView(CommonLocators.ecTeamBox(teamBox));
-        DriverAction.waitSec(1);
-        DriverAction.hoverOver(CommonLocators.ecTeamBox(teamBox));
-        DriverAction.waitSec(1);
-        DriverAction.getElement(By.xpath("//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']")).click();
-
-        List<WebElement> members = DriverAction.getElements(By.xpath("(//tr[@class='nodes'])[3]/td/table"));
-        String str = "(//tr[@class='nodes'])[3]/td/table";
-        String str2 = "/tr[@class='nodes']/td/table";
-        while (!members.isEmpty()) {
-            for (int i = 0; i < members.size(); i++) {
-                DriverAction.scrollIntoView(members.get(i));
-                DriverAction.hoverOver(members.get(i));
-                if (DriverAction.isExist(CommonLocators.downArrow)) {
-                    DriverAction.getElement(CommonLocators.downArrow).click();
-                    DriverAction.waitSec(1);
-                } else {
-                    GemTestReporter.addTestStep("Down Arrow", "Down Arrow is not Present!", STATUS.INFO, DriverAction.takeSnapShot());
-                }
-            }
-            members.clear();
-            str = str + str2;
-            members.addAll(DriverAction.getElements(By.xpath(str)));
-
-        }
-    }
-    @Then("Check employee in DC view for {string} of OrgChart")
-    public void check_for_to_employee_in_dc_view_of_org_chart(String dcTechName) {
+public class newPimcoDC {
+    @Given("Check employee in PIMCODC view for {string} of OrgChart")
+    public void check_for_to_employee_in_pimcodc_view_of_org_chart(String dcTechName) {
         boolean passed = false;
         GenericUtils.waitUntilLoaderDisappear();
         GenericUtils.waitUntilElementAppear(CommonLocators.chartContainer);
         List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         int flag = 1;
-        for (HashMap<String, String> hashMap : hashMapList) {
+        for (HashMap<String, String> hashMap : hashMapList){
             if (hashMap.get("DCTech").contains(dcTechName)
                     || (hashMap.containsKey("SecondaryDCs") &&
                     hashMap.get("SecondaryDCs") != null &&
@@ -75,7 +37,7 @@ public class DCTechView {
                     continue;
                 }
                 String mentorDCTech = GenericUtils.getDcTech(mentorName, mentorCode);
-                String mentorSecondaryDCTech = GenericUtils.getSecondaryDcTech(mentorName,mentorCode);
+                String mentorSecondaryDCTech = GenericUtils.getSecondaryDcTech(mentorName, mentorCode);
                 assert mentorDCTech != null;
                 if (!mentorDCTech.contains(dcTechName) && !mentorSecondaryDCTech.contains(dcTechName)) {
                     if (!DriverAction.isExist(CommonLocators.hierarchyCheck(mentorName,mentorCode, empName, empCode))) {
@@ -95,7 +57,7 @@ public class DCTechView {
                     }
                 }
                 flag++;
-                scrollToElement.scrollToElement(empName, empCode);
+                scrollToElement.scrollToElement(empName,empCode);
                 DriverAction.getElement(CommonLocators.employeeDiv(empName, empCode)).click();
                 GenericUtils.waitUntilElementAppear(CommonLocators.infoCard);
                 DriverAction.waitSec(2);
@@ -162,10 +124,13 @@ public class DCTechView {
                     GemTestReporter.addTestStep("Verify if " + empName + " is at right hierarchy or not",
                             empName + " has wrong value: " + wrongValue, STATUS.FAIL, DriverAction.takeSnapShot());
                 }
+
                 DriverAction.getElement(CommonLocators.crossIcon).click();
+
             }
 
         }
+
+
     }
 }
-

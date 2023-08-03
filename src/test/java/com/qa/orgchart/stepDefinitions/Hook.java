@@ -9,6 +9,5 @@ public class Hook {
     @Before
     public void setup() throws GemException {
         DriverManager.setUpBrowser();
-        DriverAction.waitSec(2);
     }
 }
