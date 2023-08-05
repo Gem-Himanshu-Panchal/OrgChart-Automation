@@ -1,3 +1,4 @@
+@testDC
 Feature: DC view data validations
 
   Background: Verify if user successfully log into Orgchart

@@ -80,4 +80,8 @@ public class CommonLocators {
     public static By dcTechEmployee(String dcTech, String name, String code){
         return By.xpath("//div[contains(text(),'"+dcTech+"')]//ancestor::table[1]//tr[@class='lines'][1]/following-sibling::tr[@class='nodes']//div[contains(@data-source,'"+name+"') and contains(@data-source,'"+code+"')]");
     }
+
+    public static By loginEmail = By.xpath("//input[@type='email']");
+    public static By submitButton = By.xpath("//input[@type='submit']");
+    public static By loginPswd = By.xpath("//input[@type='password']");
 }
