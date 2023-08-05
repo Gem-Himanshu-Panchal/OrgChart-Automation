@@ -76,9 +76,6 @@ public class LoginSrepDefinition {
                     DriverAction.switchToWindow(mainWindow);
                 }
             }
-//            DriverAction.waitSec(5);
-//            DriverAction.switchToWindow(mainWin);
-//            DriverAction.waitSec(5);
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
             throw new RuntimeException(e);

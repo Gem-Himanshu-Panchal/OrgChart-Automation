@@ -15,6 +15,13 @@ public class CommonLocators {
     public static By employeeProfile = By.xpath("//div[@class='nsm-body']//img");
     public static By crossIcon = By.xpath("//span[@class='myclose']");
     public static By downArrow = By.xpath("//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']");
+    public static By firstRowEmployees = By.xpath("(//tr[@class='nodes'])[3]/td/table//div[@class='ptitle']");
+    public static By chairName(String team) {
+        return By.xpath("//div[contains(@data-source,'name\":\""+team+"')]//div[@class='hierarchy-box-tooltip']//ul[1]");
+    }
+    public static By chairBox(String team){
+        return By.xpath("//div[contains(@data-source,'name\":\""+team+"')]//div[@class='hierarchy-box-tooltip']");
+    }
 
     public static By viewValue(String viewValue) {
         return By.xpath("//span[contains(text(), '" + viewValue + "') and contains(@class, 'ng-option-label ng-star-inserted')]");

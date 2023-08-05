@@ -8,15 +8,19 @@ import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.stepDefinitions.jsonToHash;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.jcodings.util.Hash;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.qa.orgchart.stepDefinitions.getEmployeeIndex.getIndex;
 
@@ -379,9 +383,8 @@ public class GenericUtils {
     }
 
 
-
-    public static String getDcTech(String name, String code){
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+    public static String getDcTech(String name, String code) {
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         assert hashMapList != null;
         for (HashMap<String, String> hm : hashMapList) {
             if (hm.containsKey("EmployeeName") && hm.get("EmployeeName").equalsIgnoreCase(name) &&
@@ -392,8 +395,8 @@ public class GenericUtils {
         return null;
     }
 
-    public static String getSecondaryDcTech(String name, String code){
-        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList();
+    public static String getSecondaryDcTech(String name, String code) {
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         assert hashMapList != null;
         for (HashMap<String, String> hm : hashMapList) {
             if (hm.containsKey("EmployeeName") && hm.get("EmployeeName").equalsIgnoreCase(name) &&
@@ -402,5 +405,69 @@ public class GenericUtils {
             }
         }
         return "Nil";
+    }
+
+    public static List<String> verifyEmployeeDetails(HashMap<String, String> hashMap) {
+        boolean passed = false;
+        String str = hashMap.get("DateOfJoining");
+        str = str.substring(0, 10);
+        LocalDate date = LocalDate.parse(str);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = date.format(formatter);
+        hashMap.put("DateOfJoining", formattedDate);
+
+        HashMap<String, String> extractData = new HashMap<>();
+        extractData.put("ImagePath", DriverAction.getAttributeName(CommonLocators.employeeProfile, "src"));
+        extractData.put("EmployeeName", DriverAction.getElementText(CommonLocators.employeeDataSet1(hashMap.get("EmployeeName"))));
+        extractData.put("EmployeeCode", DriverAction.getElementText(CommonLocators.employeeDataSet1(hashMap.get("EmployeeCode"))).substring(1, DriverAction.getElementText(CommonLocators.employeeDataSet1(hashMap.get("EmployeeCode"))).length() - 1));
+        extractData.put("Designation", DriverAction.getElementText(CommonLocators.employeeDataSet1(hashMap.get("Designation"))));
+        extractData.put("EmailId", DriverAction.getElementText(CommonLocators.employeeDataSet3("Email")));
+        extractData.put("MobileNumber", DriverAction.getElementText(CommonLocators.employeeDataSet3("Phone Number")));
+        extractData.put("Location", DriverAction.getElementText(CommonLocators.employeeDataSet3("Location")));
+        extractData.put("DateOfJoining", DriverAction.getElementText(CommonLocators.employeeDataSet3("Date of Joining")));
+        String[] temp = DriverAction.getElementText(CommonLocators.employeeDataSet4("Experience")).split(" ");
+        extractData.put("OverallExp", temp[0]);
+        extractData.put("ECTech", DriverAction.getElementText(CommonLocators.employeeDataSet3("Engineering Council")));
+        extractData.put("DCTech", DriverAction.getElementText(CommonLocators.employeeDataSet3("Delivery Council")));
+        if (hashMap.containsKey("PrimarySkills") && hashMap.containsKey("SecondarySkills"))
+            extractData.put("BothSkills", DriverAction.getElementText(CommonLocators.employeeDataSet3("Skills")));
+        else if (hashMap.containsKey("PrimarySkills"))
+            extractData.put("PrimarySkills", DriverAction.getElementText(CommonLocators.employeeDataSet3("Skills")));
+        else if (hashMap.containsKey("SecondarySkills"))
+            extractData.put("SecondarySkills", DriverAction.getElementText(CommonLocators.employeeDataSet3("Skills")));
+
+        extractData.put("ECMentorName", DriverAction.getElementText(CommonLocators.employeeDataSet3("EC Mentor")));
+
+
+        String wrongValue = "";
+        for (Map.Entry<String, String> entry : extractData.entrySet()) {
+            String key = entry.getKey();
+            String value1 = entry.getValue();
+            String value2 = "";
+            if (key.equalsIgnoreCase("PrimarySkills")) {
+                value2 = hashMap.get(key);
+            } else if (key.equalsIgnoreCase("SecondarySkills")) {
+                value2 = hashMap.get(key);
+            } else if (key.equalsIgnoreCase("BothSkills")) {
+                value2 = hashMap.get("PrimarySkills") + ", " + hashMap.get("SecondarySkills");
+            } else {
+                value2 = hashMap.get(key);
+            }
+            if (value1.equals(value2) || value1.equalsIgnoreCase("NA")) {
+                passed = true;
+            } else {
+                passed = false;
+                wrongValue = key;
+                break;
+            }
+
+        }
+        List<String> li = new ArrayList<>();
+        if (passed) {
+            li.add("True");
+        } else li.add("False");
+        li.add(wrongValue);
+        return li;
     }
 }
