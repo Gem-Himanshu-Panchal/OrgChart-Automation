@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class newPimcoDC {
+public class PimcoDCView {
     @Given("Check employee in PIMCODC view for {string} of OrgChart")
     public void check_for_to_employee_in_pimcodc_view_of_org_chart(String dcTechName) {
         boolean passed = false;
