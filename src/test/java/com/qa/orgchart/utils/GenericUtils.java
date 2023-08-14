@@ -1,14 +1,11 @@
 package com.qa.orgchart.utils;
 
-import com.gemini.generic.reporting.GemTestReporter;
-import com.gemini.generic.reporting.STATUS;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gemini.generic.ui.utils.DriverAction;
 import com.gemini.generic.ui.utils.DriverManager;
 import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.stepDefinitions.jsonToHash;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import org.jcodings.util.Hash;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -165,7 +162,6 @@ public class GenericUtils {
             hierarchy.remove("GSI N 002");
         }
         hierarchy.add(dcTech);
-        System.out.println(hierarchy);
         return hierarchy;
     }
 
@@ -376,9 +372,6 @@ public class GenericUtils {
             hierarchy.add(secondaryDC);
         }
 
-
-        System.out.println(hierarchy);
-
         return hierarchy;
     }
 
@@ -469,5 +462,25 @@ public class GenericUtils {
         } else li.add("False");
         li.add(wrongValue);
         return li;
+    }
+
+    public static boolean isEmployeeInFirstRow(List<WebElement> empList, String empName, String empCode) {
+        for (int i = 0; i < empList.size(); i++) {
+            String dataSource = empList.get(i).getAttribute("data-source");
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode jsonNode = objectMapper.readTree(dataSource);
+                String name = jsonNode.get("name").asText();
+                String employeeCode = jsonNode.get("EmployeeCode").asText();
+                if (employeeCode.length() > 10)
+                    employeeCode = employeeCode.substring(0, employeeCode.length() - 4);
+                if (name.equalsIgnoreCase(empName) && empCode.equalsIgnoreCase(employeeCode))
+                    return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return false;
     }
 }

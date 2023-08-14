@@ -30,7 +30,7 @@ Feature: DC view data validations
     Given Open modals in "DPLI/PLIL"
     Then Check employee in DC view for "DPLI/PLIL" of OrgChart
 
-
+@run
   Scenario: Verify DC view for Edward Jones Developer Platform
     Given Open modals in "Edward Jones Developer Platform"
     Then Check employee in DC view for "Edward Jones Developer Platform" of OrgChart
@@ -40,7 +40,7 @@ Feature: DC view data validations
     Given Open modals in "Edward Jones QA"
     Then Check employee in DC view for "Edward Jones QA" of OrgChart
 
-
+@run
   Scenario: Verify DC view for Hdfc Ergo
     Given Open modals in "Hdfc Ergo"
     Then Check employee in DC view for "Hdfc Ergo" of OrgChart
