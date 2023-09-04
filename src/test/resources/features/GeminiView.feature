@@ -36,7 +36,7 @@ Feature: Gemini view data validations
   Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 900-1000
     Given Search for 900 to 1000 employee in OrgChart
 
-  Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 1000-1139
+  Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 1000-End
     Given Search for 1100 to 1131 employee in OrgChart
 
 
