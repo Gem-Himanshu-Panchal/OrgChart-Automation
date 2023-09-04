@@ -6,6 +6,7 @@ import com.gemini.generic.ui.utils.DriverAction;
 import com.qa.orgchart.locators.CommonLocators;
 import com.qa.orgchart.utils.GenericUtils;
 import io.cucumber.java.en.Given;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.time.LocalDate;
@@ -23,18 +24,27 @@ public class GeminiView {
             GenericUtils.waitUntilLoaderDisappear();
             List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
 
-            for (int i = start; i < end; i++) {
+            Outerloop: for (int i = start; i < end; i++) {
 //                62 for Aghashir Hadiyev, 1116 Vishal Malik
-                if (i != 62 && i!=1116) {
+//                if (i != 62 && i!=1116)
+                {
                     List<String> userHierarchy = GenericUtils.getHierarchy(i);
 
                     int lastIndex = userHierarchy.size() - 1;
                     while (userHierarchy.size() != 2) {
+                        if(!DriverAction.isExist(CommonLocators.employeeDiv(userHierarchy.get(lastIndex-1),userHierarchy.get(lastIndex)))){
+                            GemTestReporter.addTestStep(i + ". Verify if " + userHierarchy.get(0) + " is at right hierarchy or not",
+                                    userHierarchy.get(0) + " is missing from hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
+                            continue Outerloop;
+                        }
                         DriverAction.scrollIntoView(CommonLocators.dataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
                         DriverAction.scrollToBottom();
+                        DriverAction.waitSec(1);
                         DriverAction.hoverOver(CommonLocators.dataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
+
                         DriverAction.scrollIntoView(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex)));
                         DriverAction.scrollToBottom();
+                        DriverAction.waitSec(1);
                         DriverAction.getElement(CommonLocators.downArrowDataSource("name", userHierarchy.get(lastIndex - 1), "EmployeeCode", userHierarchy.get(lastIndex))).click();
                         userHierarchy.remove(lastIndex);
                         userHierarchy.remove(lastIndex - 1);
@@ -51,6 +61,7 @@ public class GeminiView {
                                 userHierarchy.get(0) + " is at wrong hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
                     }
 
+                    DriverAction.waitSec(2);
                     DriverAction.getElement(CommonLocators.employeeDiv(userHierarchy.get(0), userHierarchy.get(1))).click();
                     GenericUtils.waitUntilElementAppear(CommonLocators.infoCard);
                     DriverAction.waitSec(2);
@@ -150,6 +161,26 @@ public class GeminiView {
         } catch (Exception e) {
             GemTestReporter.addTestStep("Exception Occurred", "Exception: " + e, STATUS.FAIL);
             throw new RuntimeException(e);
+        }
+    }
+
+    @Given("Open hierarchy in Gemini View")
+    public void openHierarchyInGeminiView() {
+        List<WebElement> members = DriverAction.getElements(By.xpath("(//tr[@class='nodes'])[1]/td/table"));
+        String str = "(//tr[@class='nodes'])[1]/td/table";
+        String str2 = "/tr[@class='nodes']/td/table";
+        while (!members.isEmpty()) {
+            for (int i = 0; i < members.size(); i++) {
+                DriverAction.scrollIntoView(members.get(i));
+                DriverAction.hoverOver(members.get(i));
+                if (DriverAction.isExist(CommonLocators.downArrow)) {
+                    DriverAction.getElement(CommonLocators.downArrow).click();
+                    DriverAction.waitSec(1);
+                }
+            }
+            members.clear();
+            str = str + str2;
+            members.addAll(DriverAction.getElements(By.xpath(str)));
         }
     }
 }

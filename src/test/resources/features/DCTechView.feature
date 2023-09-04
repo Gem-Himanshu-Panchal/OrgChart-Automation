@@ -1,4 +1,3 @@
-@testDCView
 Feature: DC view data validations
 
   Background: Verify if user successfully log into Orgchart
@@ -116,101 +115,113 @@ Feature: DC view data validations
     Then Check employee in DC view for "Tata Aig" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Analytics Support
+  Scenario: Verify DC view for Pimco Analytics Support
     Given Open modals in "Pimco Analytics Support"
     Then Check employee in DC view for "Pimco Analytics Support" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Client Facing Tech
+  Scenario: Verify DC view for Pimco Client Facing Tech
     Given Open modals in "Pimco Client Facing Tech"
     Then Check employee in DC view for "Pimco Client Facing Tech" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Credit Research / PARR
+  Scenario: Verify DC view for Pimco Credit Research / PARR
     Given Open modals in "Pimco Credit Research / PARR"
     Then Check employee in DC view for "Pimco Credit Research / PARR" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco CSA frontend & ABS Tech
+  Scenario: Verify DC view for Pimco CSA frontend & ABS Tech
     Given Open modals in "Pimco CSA frontend & ABS Tech"
     Then Check employee in DC view for "Pimco CSA frontend & ABS Tech" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Data Engineering
+  Scenario: Verify DC view for Pimco Data Engineering
     Given Open modals in "Pimco Data Engineering"
     Then Check employee in DC view for "Pimco Data Engineering" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Data Science
+  Scenario: Verify DC view for Pimco Data Science
     Given Open modals in "Pimco Data Science"
     Then Check employee in DC view for "Pimco Data Science" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco DevOps / Platform Engineering
+  Scenario: Verify DC view for Pimco DevOps / Platform Engineering
     Given Open modals in "Pimco DevOps / Platform Engineering"
     Then Check employee in DC view for "Pimco DevOps / Platform Engineering" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco EMEA Tech
+  Scenario: Verify DC view for Pimco EMEA Tech
     Given Open modals in "Pimco EMEA Tech"
     Then Check employee in DC view for "Pimco EMEA Tech" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco FE Infrastructure
+  Scenario: Verify DC view for Pimco FE Infrastructure
     Given Open modals in "Pimco FE Infrastructure"
     Then Check employee in DC view for "Pimco FE Infrastructure" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Infrastructure
+  Scenario: Verify DC view for Pimco Infrastructure
     Given Open modals in "Pimco Infrastructure"
     Then Check employee in DC view for "Pimco Infrastructure" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Investment Data
+  Scenario: Verify DC view for Pimco Investment Data
     Given Open modals in "Pimco Investment Data"
     Then Check employee in DC view for "Pimco Investment Data" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Operations Tech
+  Scenario: Verify DC view for Pimco Operations Tech
     Given Open modals in "Pimco Operations Tech"
-    Then Check employee in PIMCODC view for "Pimco Operations Tech" of OrgChart
+    Then Check employee in DC view for "Pimco Operations Tech" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Portfolio Analytics Support
+  Scenario: Verify DC view for Pimco Portfolio Analytics Support
     Given Open modals in "Pimco Portfolio Analytics Support"
     Then Check employee in DC view for "Pimco Portfolio Analytics Support" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Puma
+  Scenario: Verify DC view for Pimco Puma
     Given Open modals in "Pimco Puma"
     Then Check employee in DC view for "Pimco Puma" of OrgChart
 
   @Dothis @check
-  Scenario: Verify Pimco DC view for Pimco QA
+  Scenario: Verify DC view for Pimco QA
     Given Open modals in "Pimco QA"
     Then Check employee in DC view for "Pimco QA" of OrgChart
 
   @Dothis @check
-  Scenario: Verify Pimco DC view for Pimco Reference Data
+  Scenario: Verify DC view for Pimco Reference Data
     Given Open modals in "Pimco Reference Data"
     Then Check employee in DC view for "Pimco Reference Data" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco RiskOps
+  Scenario: Verify DC view for Pimco RiskOps
     Given Open modals in "Pimco RiskOps"
     Then Check employee in DC view for "Pimco RiskOps" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Sales & Marketing Tech
+  Scenario: Verify DC view for Pimco Sales & Marketing Tech
     Given Open modals in "Pimco Sales & Marketing Tech"
     Then Check employee in DC view for "Pimco Sales & Marketing Tech" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco Security
+  Scenario: Verify DC view for Pimco Security
     Given Open modals in "Pimco Security"
     Then Check employee in DC view for "Pimco Security" of OrgChart
 
   @Dothis
-  Scenario: Verify Pimco DC view for Pimco ServiceOps
+  Scenario: Verify DC view for Pimco ServiceOps
     Given Open modals in "Pimco ServiceOps"
     Then Check employee in DC view for "Pimco ServiceOps" of OrgChart
+
+  Scenario: Verify DC view for Hartron
+    Given Open modals in "Hartron"
+    Then Check employee in DC view for "Hartron" of OrgChart
+
+  Scenario: Verify DC view for Piston
+    Given Open modals in "Piston"
+    Then Check employee in DC view for "Piston" of OrgChart
+
+  Scenario: Verify DC view for Sports Performance Analytics
+    Given Open modals in "Sports Performance Analytics"
+    Then Check employee in DC view for "Sports Performance Analytics" of OrgChart

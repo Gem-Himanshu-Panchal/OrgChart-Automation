@@ -388,6 +388,18 @@ public class GenericUtils {
         return null;
     }
 
+    public static String getEcTech(String name, String code) {
+        List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
+        assert hashMapList != null;
+        for (HashMap<String, String> hm : hashMapList) {
+            if (hm.containsKey("EmployeeName") && hm.get("EmployeeName").equalsIgnoreCase(name) &&
+                    hm.containsKey("EmployeeCode") && hm.get("EmployeeCode").equalsIgnoreCase(code)) {
+                return hm.get("ECTech");
+            }
+        }
+        return null;
+    }
+
     public static String getSecondaryDcTech(String name, String code) {
         List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
         assert hashMapList != null;

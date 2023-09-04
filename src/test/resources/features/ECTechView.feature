@@ -1,4 +1,4 @@
-@testEC
+@testECViewHO
 Feature: EC view data validations
 
   Background: Verify if user successfully log into Orgchart
@@ -6,21 +6,94 @@ Feature: EC view data validations
     Then Verify if user is on OrgChart dashboard
     And Switch to "EC" view
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 0-200
-    Given Search for 0 to 200 employee in EC view of OrgChart
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 200-400
-    Given Search for 200 to 400 employee in EC view of OrgChart
+  Scenario: Verify DC view for .Net
+    Given Open modals box in EC View ".Net"
+    Then Check employee in EC view for ".Net" of OrgChart
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 400-600
-    Given Search for 400 to 600 employee in EC view of OrgChart
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 600-800
-    Given Search for 600 to 800 employee in EC view of OrgChart
+  Scenario: Verify DC view for Accounts
+    Given Open modals box in EC View "Accounts"
+    Then Check employee in EC view for "Accounts" of OrgChart
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 800-1000
-    Given Search for 800 to 1000 employee in EC view of OrgChart
 
-  Scenario: Orgchart, Open employee branch in EC View and verify if correct information is displayed or not 1000-1137
-    Given Search for 1000 to 1137 employee in EC view of OrgChart
+  Scenario: Verify DC view for Accounts
+    Given Open modals box in EC View "Admin"
+    Then Check employee in EC view for "Admin" of OrgChart
 
+
+  Scenario: Verify DC view for Architect
+    Given Open modals box in EC View "Architect"
+    Then Check employee in EC view for "Architect" of OrgChart
+
+
+
+  Scenario: Verify DC view for Asset Management
+    Given Open modals box in EC View "Asset Management"
+    Then Check employee in EC view for "Asset Management" of OrgChart
+
+
+  Scenario: Verify DC view for Data Engineering
+    Given Open modals box in EC View "Data Engineering"
+    Then Check employee in EC view for "Data Engineering" of OrgChart
+
+
+  Scenario: Verify DC view for Data Science/Quant/ML
+    Given Open modals box in EC View "Data Science/Quant/ML"
+    Then Check employee in EC view for "Data Science/Quant/ML" of OrgChart
+
+
+  Scenario: Verify DC view for DesignBranding
+    Given Open modals box in EC View "DesignBranding"
+    Then Check employee in EC view for "DesignBranding" of OrgChart
+
+
+  Scenario: Verify DC view for Devops
+    Given Open modals box in EC View "Devops"
+    Then Check employee in EC view for "Devops" of OrgChart
+
+
+
+  Scenario: Verify DC view for Executive Office
+    Given Open modals box in EC View "Executive Office"
+    Then Check employee in EC view for "Executive Office" of OrgChart
+
+
+  Scenario: Verify DC view for Full stack (Angular/ Node/ React)
+    Given Open modals box in EC View "Full stack (Angular/ Node/ React)"
+    Then Check employee in EC view for "Full stack (Angular/ Node/ React)" of OrgChart
+
+
+  Scenario: Verify DC view for Human Resource
+    Given Open modals box in EC View "Human Resource"
+    Then Check employee in EC view for "Human Resource" of OrgChart
+
+
+  Scenario: Verify DC view for Infrastructure/IT
+    Given Open modals box in EC View "Infrastructure/IT"
+    Then Check employee in EC view for "Infrastructure/IT" of OrgChart
+
+
+  Scenario: Verify DC view for Insurance
+    Given Open modals box in EC View "Insurance"
+    Then Check employee in EC view for "Insurance" of OrgChart
+
+
+  Scenario: Verify DC view for Java
+    Given Open modals box in EC View "Java"
+    Then Check employee in EC view for "Java" of OrgChart
+
+
+  Scenario: Verify DC view for Python/C++
+    Given Open modals box in EC View "Python/C++"
+    Then Check employee in EC view for "Python/C++" of OrgChart
+
+
+  Scenario: Verify DC view for QA
+    Given Open modals box in EC View "QA"
+    Then Check employee in EC view for "QA" of OrgChart
+
+
+  Scenario: Verify DC view for Training
+    Given Open modals box in EC View "Training"
+    Then Check employee in EC view for "Training" of OrgChart

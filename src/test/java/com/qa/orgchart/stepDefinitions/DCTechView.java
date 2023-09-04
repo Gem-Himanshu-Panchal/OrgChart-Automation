@@ -36,6 +36,7 @@ public class DCTechView {
         DriverAction.waitSec(1);
         DriverAction.getElement(By.xpath("//i[@class='edge verticalEdge bottomEdge fa fa-chevron-circle-down']")).click();
 
+        DriverAction.waitSec(2);
         firstRowEmployees = DriverAction.getElements(By.xpath("(//tr[@class='nodes'])[3]/td/table//div[@class='node cursorPointer']"));
 
         List<WebElement> members = DriverAction.getElements(By.xpath("(//tr[@class='nodes'])[3]/td/table"));
@@ -59,7 +60,7 @@ public class DCTechView {
 
     @Then("Check employee in DC view for {string} of OrgChart")
     public void check_for_to_employee_in_dc_view_of_org_chart(String dcTechName) {
-        boolean passed = false;
+
         GenericUtils.waitUntilLoaderDisappear();
         GenericUtils.waitUntilElementAppear(CommonLocators.chartContainer);
         List<HashMap<String, String>> hashMapList = jsonToHash.getHashList2();
@@ -84,7 +85,7 @@ public class DCTechView {
 
                     if (!DriverAction.isExist(CommonLocators.employeeDiv(empName, empCode))) {
                         GemTestReporter.addTestStep(flag + ". Verify if " + empName + " is at right hierarchy or not",
-                                empName + " is at wrong hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
+                                empName + " is missing from hierarchy", STATUS.FAIL, DriverAction.takeSnapShot());
                         flag++;
                         continue;
                     }

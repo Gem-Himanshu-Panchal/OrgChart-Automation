@@ -6,12 +6,12 @@ Feature: Pimco DC view data validations
     Then Verify if user is on OrgChart dashboard
     And Switch to "Pimco Dc" view
 
-#    abhay srivasta ka info card open ni hori
+
   Scenario: Verify Pimco DC view for Pimco Analytics Support
     Given Open modals box in "Pimco Analytics Support"
-    Then Check employee in DC view for "Pimco Analytics Support" of OrgChart
+    Then Check employee in PIMCODC view for "Pimco Analytics Support" of OrgChart
 
-#    ankit mail issue
+
   Scenario: Verify Pimco DC view for Pimco Client Facing Tech
     Given Open modals box in "Pimco Client Facing Tech"
     Then Check employee in PIMCODC view for "Pimco Client Facing Tech" of OrgChart
