@@ -1,4 +1,4 @@
-@geminiViewTesting
+@regression
 Feature: Gemini view data validations
 
   Background: Verify if user successfully log into Orgchart
@@ -15,6 +15,7 @@ Feature: Gemini view data validations
   Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 200-300
     Given Search for 200 to 300 employee in OrgChart
 
+    @runthissce
   Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 300-400
     Given Search for 300 to 400 employee in OrgChart
 
@@ -30,6 +31,7 @@ Feature: Gemini view data validations
   Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 700-800
     Given Search for 700 to 800 employee in OrgChart
 
+  @runthissce
   Scenario: Open employee branch in Gemini View and verify if correct information is displayed or not 800-900
     Given Search for 800 to 900 employee in OrgChart
 

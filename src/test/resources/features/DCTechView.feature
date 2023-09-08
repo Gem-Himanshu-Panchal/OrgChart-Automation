@@ -1,3 +1,4 @@
+@regression
 Feature: DC view data validations
 
   Background: Verify if user successfully log into Orgchart
@@ -5,16 +6,17 @@ Feature: DC view data validations
     Then Verify if user is on OrgChart dashboard
     And Switch to "DC" view
 
+    @testthis
   Scenario: Verify DC view for Accounts
     Given Open modals in "Accounts"
     Then Check employee in DC view for "Accounts" of OrgChart
 
-
+  @testthis
   Scenario: Verify DC view for AFLI
     Given Open modals in "AFLI"
     Then Check employee in DC view for "AFLI" of OrgChart
 
-
+  @testthis
   Scenario: Verify DC view for Beacon DevOps
     Given Open modals in "Beacon DevOps"
     Then Check employee in DC view for "Beacon DevOps" of OrgChart
@@ -24,12 +26,12 @@ Feature: DC view data validations
     Given Open modals in "Discern"
     Then Check employee in DC view for "Discern" of OrgChart
 
-
+  @testthis
   Scenario: Verify DC view for DPLI/PLIL
     Given Open modals in "DPLI/PLIL"
     Then Check employee in DC view for "DPLI/PLIL" of OrgChart
 
-@run
+@run @testthis
   Scenario: Verify DC view for Edward Jones Developer Platform
     Given Open modals in "Edward Jones Developer Platform"
     Then Check employee in DC view for "Edward Jones Developer Platform" of OrgChart
