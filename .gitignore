@@ -1,9 +1,0 @@
-/shelf/
-/.idea/
-**/target/**
-target
-/target/
-/Report/
-/helpdesk_automation.iml
-/Demo-UI-BDD.iml/
-src/test/resources/gemjar-config.json
